@@ -11,15 +11,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Buildozer ile APK derle
-        uses: ArtemSBulgakov/buildozer-action@v1
-        id: buildozer
-        with:
-          command: buildozer android debug
-          buildozer_version: stable
+      - name: Sistem paketlerini kur
+        run: |
+          sudo apt update
+          sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev cmake libffi-dev libssl-dev
+
+      - name: Buildozer kur
+        run: pip install buildozer cython==0.29.37
+
+      - name: APK derle (lisanslari otomatik kabul et)
+        run: yes | buildozer -v android debug
 
       - name: APK'yi yukle
         uses: actions/upload-artifact@v4
         with:
           name: minikkasifler-apk
-          path: ${{ steps.buildozer.outputs.filename }}
+          path: bin/*.apk
