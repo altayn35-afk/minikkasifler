@@ -43,7 +43,7 @@ android.python_version = 3.10
 
 # (list) Application requirements
 # comma separated e.g. requirements = python3,kivy,pyjnius
-requirements = python3==3.11.9,hostpython3==3.11.9,kivy,gtts,requests
+requirements = python3,kivy,gtts,requests
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
